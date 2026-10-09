@@ -1,6 +1,7 @@
 .contact-banner {
   position: relative;
   overflow: hidden;
+  background: var(--deep-plum);
 }
 .contact-banner__bg {
   position: absolute;
@@ -8,6 +9,7 @@
   background: var(--gradient-hero);
   background-size: 200% 200%;
   animation: gradientShift 8s ease infinite;
+  z-index: 0;
 }
 .contact-banner__inner {
   display: grid;

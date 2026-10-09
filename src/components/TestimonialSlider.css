@@ -2,13 +2,7 @@
   position: relative;
   padding: clamp(4rem, 8vw, 6rem) 0;
   overflow: hidden;
-}
-.testimonials-bg {
-  position: absolute;
-  inset: 0;
-  background: var(--gradient-hero);
-  background-size: 200% 200%;
-  animation: gradientShift 10s ease infinite;
+  background: var(--deep-plum);
 }
 .testimonials-slider {
   max-width: 760px;

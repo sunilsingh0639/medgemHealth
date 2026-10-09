@@ -1,4 +1,4 @@
-.why-section { background: var(--warm-ivory); }
+.why-section { background: var(--warm-ivory); overflow: hidden; }
 .why-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
