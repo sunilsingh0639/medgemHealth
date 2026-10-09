@@ -1,0 +1,80 @@
+.testimonials-section {
+  position: relative;
+  padding: clamp(4rem, 8vw, 6rem) 0;
+  overflow: hidden;
+}
+.testimonials-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-hero);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+.testimonials-slider {
+  max-width: 760px;
+  margin: 2rem auto 0;
+  position: relative;
+  z-index: 1;
+}
+.testimonial-card {
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  position: relative;
+  min-height: 260px;
+}
+.testimonial-quote {
+  color: var(--champagne-gold);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+.testimonial-text {
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  color: var(--dark-text);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+.testimonial-footer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.testimonial-avatar {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--champagne-gold);
+  flex-shrink: 0;
+}
+.testimonial-name { font-weight: 700; font-size: 0.95rem; color: var(--dark-text); }
+.testimonial-meta { font-size: 0.8rem; color: var(--muted-text); }
+.testimonial-stars { display: flex; gap: 2px; margin-top: 4px; }
+.testimonial-note {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--muted-text);
+  font-style: italic;
+}
+.testimonials-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+.testimonials-controls .dest-ctrl {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.2);
+  color: var(--white);
+}
+.testimonials-controls .dest-ctrl:hover { background: var(--champagne-gold); border-color: var(--champagne-gold); color: var(--deep-plum); }
+.testimonials-dots { display: flex; gap: 6px; }
+.testimonial-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: var(--transition);
+  cursor: pointer;
+}
+.testimonial-dot--active { background: var(--champagne-gold); width: 24px; border-radius: 4px; }

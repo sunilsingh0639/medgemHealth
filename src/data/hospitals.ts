@@ -1,0 +1,24 @@
+export interface Hospital {
+  id: number;
+  name: string;
+  city: string;
+  country: string;
+  image: string;
+  specialties: string[];
+  accreditation: string;
+  description: string;
+  beds: number;
+  established: number;
+  rating: number;
+}
+
+export const hospitals: Hospital[] = [
+  { id: 1, name: 'Apollo Hospitals', city: 'Chennai', country: 'India', image: 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600&q=80', specialties: ['Cardiology', 'Oncology', 'Neurology', 'Orthopaedics'], accreditation: 'JCI Accredited (Demo)', description: 'A leading multi-specialty hospital offering advanced medical care across 70+ specialties with state-of-the-art technology.', beds: 700, established: 1983, rating: 4.8 },
+  { id: 2, name: 'Bumrungrad International', city: 'Bangkok', country: 'Thailand', image: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80', specialties: ['Cosmetic Surgery', 'Cardiology', 'Orthopaedics', 'Dental'], accreditation: 'JCI Accredited (Demo)', description: "One of Asia's premier international hospitals serving patients from over 190 countries with world-class facilities.", beds: 580, established: 1980, rating: 4.9 },
+  { id: 3, name: 'Gleneagles Hospital', city: 'Singapore', country: 'Singapore', image: 'https://images.unsplash.com/photo-1538108149393-fbbd81895907?w=600&q=80', specialties: ['Oncology', 'Neurology', 'Cardiology', 'Transplant'], accreditation: 'JCI Accredited (Demo)', description: 'A premier tertiary care hospital in Singapore known for excellence in complex medical procedures and patient care.', beds: 380, established: 1957, rating: 4.7 },
+  { id: 4, name: 'Charité Medical Centre', city: 'Berlin', country: 'Germany', image: 'https://images.unsplash.com/photo-1587351021759-3e566b6af7cc?w=600&q=80', specialties: ['Neurology', 'Oncology', 'Cardiology', 'Research'], accreditation: 'ISO Certified (Demo)', description: "One of Europe's largest university hospitals with cutting-edge research facilities and specialist medical expertise.", beds: 3000, established: 1710, rating: 4.9 },
+  { id: 5, name: 'Cleveland Clinic Abu Dhabi', city: 'Abu Dhabi', country: 'UAE', image: 'https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80', specialties: ['Cardiology', 'Neurology', 'Oncology', 'Orthopaedics'], accreditation: 'JCI Accredited (Demo)', description: "A world-class multispecialty hospital bringing Cleveland Clinic's renowned expertise to the Middle East.", beds: 364, established: 2015, rating: 4.8 },
+  { id: 6, name: 'Prince Court Medical Centre', city: 'Kuala Lumpur', country: 'Malaysia', image: 'https://images.unsplash.com/photo-1551076805-e1869033e561?w=600&q=80', specialties: ['Fertility', 'Cardiology', 'Orthopaedics', 'Wellness'], accreditation: 'ISO Certified (Demo)', description: 'A premium private hospital offering personalised healthcare with a focus on patient comfort and clinical excellence.', beds: 257, established: 2008, rating: 4.7 },
+  { id: 7, name: 'Acibadem Healthcare', city: 'Istanbul', country: 'Turkey', image: 'https://images.unsplash.com/photo-1504439468489-c8920d796a29?w=600&q=80', specialties: ['Oncology', 'Cardiology', 'Hair Transplant', 'Dental'], accreditation: 'JCI Accredited (Demo)', description: "Turkey's leading healthcare group offering advanced medical treatments with internationally trained specialists.", beds: 450, established: 1991, rating: 4.6 },
+  { id: 8, name: 'The London Clinic', city: 'London', country: 'United Kingdom', image: 'https://images.unsplash.com/photo-1580281657702-257584239a55?w=600&q=80', specialties: ['Oncology', 'Cardiology', 'Neurology', 'Orthopaedics'], accreditation: 'CQC Registered (Demo)', description: 'A prestigious independent hospital in central London offering exceptional specialist care and personalised treatment.', beds: 234, established: 1932, rating: 4.8 },
+];

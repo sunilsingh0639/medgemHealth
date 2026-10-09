@@ -1,0 +1,24 @@
+export interface Destination {
+  id: number;
+  country: string;
+  city: string;
+  tagline: string;
+  description: string;
+  image: string;
+  treatments: string[];
+  hospitals: number;
+  specialists: number;
+  flag: string;
+  highlights: string[];
+}
+
+export const destinations: Destination[] = [
+  { id: 1, country: 'India', city: 'Multiple Cities', tagline: 'World-Class Care at Accessible Costs', description: 'India is a leading medical tourism destination offering advanced treatments across cardiology, oncology, orthopaedics and more, with internationally trained specialists.', image: 'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=700&q=80', treatments: ['Cardiac Surgery', 'Organ Transplant', 'Oncology', 'Orthopaedics'], hospitals: 45, specialists: 200, flag: '🇮🇳', highlights: ['JCI Accredited Hospitals', 'English-Speaking Specialists', 'Advanced Technology'] },
+  { id: 2, country: 'Thailand', city: 'Bangkok & Phuket', tagline: 'Excellence in Healthcare and Hospitality', description: 'Thailand combines world-class medical facilities with exceptional hospitality, making it a top choice for cosmetic surgery, dental care and wellness treatments.', image: 'https://images.unsplash.com/photo-1508009603885-50cf7c579365?w=700&q=80', treatments: ['Cosmetic Surgery', 'Dental Care', 'Cardiology', 'Wellness'], hospitals: 32, specialists: 150, flag: '🇹🇭', highlights: ['International Hospitals', 'Wellness Retreats', 'Affordable Excellence'] },
+  { id: 3, country: 'Singapore', city: 'Singapore City', tagline: "Asia's Premier Medical Hub", description: 'Singapore offers cutting-edge medical technology, rigorous standards and a seamless patient experience, particularly for complex oncology and neurology cases.', image: 'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=700&q=80', treatments: ['Oncology', 'Neurology', 'Cardiology', 'Health Checkups'], hospitals: 18, specialists: 90, flag: '🇸🇬', highlights: ['Highest Medical Standards', 'Research Excellence', 'Multilingual Care'] },
+  { id: 4, country: 'Germany', city: 'Berlin & Munich', tagline: 'European Medical Excellence', description: 'Germany is renowned for its precision medicine, advanced research and specialist expertise in neurology, oncology and complex surgical procedures.', image: 'https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=700&q=80', treatments: ['Neurology', 'Oncology', 'Cardiology', 'Orthopaedics'], hospitals: 22, specialists: 110, flag: '🇩🇪', highlights: ['Research Hospitals', 'Precision Medicine', 'Specialist Expertise'] },
+  { id: 5, country: 'United Arab Emirates', city: 'Dubai & Abu Dhabi', tagline: 'Modern Healthcare in the Heart of the Gulf', description: 'The UAE offers state-of-the-art medical facilities with internationally trained specialists, serving patients from across the Middle East and beyond.', image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=700&q=80', treatments: ['Cardiology', 'Oncology', 'Fertility', 'Wellness'], hospitals: 28, specialists: 130, flag: '🇦🇪', highlights: ['World-Class Facilities', 'Multilingual Support', 'Luxury Healthcare'] },
+  { id: 6, country: 'Malaysia', city: 'Kuala Lumpur & Penang', tagline: 'Quality Healthcare in Southeast Asia', description: 'Malaysia offers high-quality medical care at competitive costs, with internationally accredited hospitals and a welcoming environment for international patients.', image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=700&q=80', treatments: ['Fertility', 'Cardiology', 'Orthopaedics', 'Wellness'], hospitals: 20, specialists: 95, flag: '🇲🇾', highlights: ['Affordable Quality', 'English-Speaking', 'Cultural Diversity'] },
+  { id: 7, country: 'Turkey', city: 'Istanbul & Ankara', tagline: 'Where East Meets West in Healthcare', description: 'Turkey has emerged as a leading destination for hair transplants, dental care, cosmetic surgery and oncology with modern facilities and experienced specialists.', image: 'https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?w=700&q=80', treatments: ['Hair Transplant', 'Dental Care', 'Cosmetic Surgery', 'Oncology'], hospitals: 35, specialists: 160, flag: '🇹🇷', highlights: ['Hair Restoration Hub', 'Dental Excellence', 'Modern Facilities'] },
+  { id: 8, country: 'United Kingdom', city: 'London & Manchester', tagline: 'Prestigious British Medical Expertise', description: "The UK offers access to some of the world's most respected medical specialists and prestigious private hospitals with a long tradition of clinical excellence.", image: 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=700&q=80', treatments: ['Oncology', 'Cardiology', 'Neurology', 'Orthopaedics'], hospitals: 15, specialists: 80, flag: '🇬🇧', highlights: ['Prestigious Specialists', 'Research Excellence', 'Private Healthcare'] },
+];
