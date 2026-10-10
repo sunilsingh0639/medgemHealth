@@ -1,4 +1,4 @@
-import HeroSection from '../components/HeroSection';
+import HeroSection from '../components/HeroSection.tsx';
 import TreatmentSearch from '../components/TreatmentSearch';
 import StatsSection from '../components/StatsSection';
 import WhyChooseUs from '../components/WhyChooseUs';

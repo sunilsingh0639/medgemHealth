@@ -7,7 +7,7 @@ body {
   color: var(--dark-text);
   background: linear-gradient(180deg, var(--warm-white) 0%, var(--light-neutral) 100%);
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -31,11 +31,14 @@ img { max-width: 100%; height: auto; display: block; }
 button { cursor: pointer; border: none; background: none; font-family: var(--font-body); }
 
 input, select, textarea {
+  min-width: 0;
+  max-width: 100%;
   font-family: var(--font-body);
   outline: none;
 }
 
 .container {
+  width: 100%;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 clamp(1rem, 4vw, 2rem);
@@ -183,9 +186,10 @@ input, select, textarea {
 .text-center { text-align: center; }
 .text-center .section-subtitle { margin: 0 auto; }
 
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
+.grid-2 > *, .grid-3 > *, .grid-4 > * { min-width: 0; }
 
 @media (max-width: 1024px) {
   .grid-4 { grid-template-columns: repeat(2, 1fr); }

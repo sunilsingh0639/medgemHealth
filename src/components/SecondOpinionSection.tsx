@@ -27,7 +27,7 @@ export default function SecondOpinionSection() {
             </p>
             <ul className="second-opinion__steps">
               {steps.map((step, i) => (
-                <motion.li key={i} className="second-opinion__step" initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={viewportConfig} transition={{ delay: i * 0.1 }}>
+                <motion.li key={i} className="second-opinion__step" initial={{ opacity: 0, y: 12 }} whileInView={{ opacity: 1, y: 0 }} viewport={viewportConfig} transition={{ delay: i * 0.1 }}>
                   <CheckCircle size={18} className="step-check" />
                   <span>{step}</span>
                 </motion.li>

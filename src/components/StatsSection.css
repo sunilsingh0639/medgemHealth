@@ -14,7 +14,7 @@
 .stats-header .section-subtitle { color: rgba(255,255,255,0.65); }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1.5rem;
   position: relative;
   z-index: 1;

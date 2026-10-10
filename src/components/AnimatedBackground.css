@@ -101,6 +101,7 @@
   position: absolute;
   inset: 0;
   width: 100%; height: 100%;
+  overflow: hidden;
 }
 
 /* ── Canvas ───────────────────────────────────────────────── */
@@ -128,7 +129,7 @@
 
 /* ── Mobile: reduce density ───────────────────────────────── */
 @media (max-width: 640px) {
-  .anim-bg__orb { filter: blur(50px); opacity: 0.6; }
+  .anim-bg__orb { filter: blur(40px); opacity: 0.35; animation: none; }
   .anim-bg__ring { display: none; }
   .anim-bg__canvas { display: none; }
 }

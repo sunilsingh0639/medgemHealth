@@ -28,9 +28,10 @@
 .filter-btn--active { background: var(--royal-purple); color: var(--white); border-color: var(--royal-purple); }
 .treatments-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
 }
+.treatments-grid > * { min-width: 0; }
 .treatment-card {
   display: block;
   background: var(--white);
