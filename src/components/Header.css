@@ -4,21 +4,31 @@
   top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 1rem 0;
+  /* Subtle dark-to-transparent gradient so nav text is readable
+     over any video frame without hiding the footage */
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 6, 18, 0.45) 0%,
+    rgba(20, 6, 18, 0.10) 70%,
+    transparent 100%
+  );
   transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
               box-shadow 0.4s cubic-bezier(0.4,0,0.2,1),
-              padding 0.4s cubic-bezier(0.4,0,0.2,1);
+              padding 0.4s cubic-bezier(0.4,0,0.2,1),
+              backdrop-filter 0.4s ease;
 }
 .header--scrolled {
-  background: rgba(255,255,255,0.97);
+  background: rgba(255, 252, 250, 0.97);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 2px 30px rgba(101,38,83,0.1);
+  box-shadow: 0 12px 40px rgba(89,48,79,0.08);
   padding: 0.55rem 0;
 }
 .header__inner {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  position: relative;
 }
 
 /* ── Logo ─────────────────────────────────────────────────── */
@@ -28,6 +38,8 @@
   gap: 10px;
   flex-shrink: 0;
   text-decoration: none;
+  position: relative;
+  z-index: 2;
 }
 .logo-mark {
   width: 40px; height: 40px;
@@ -62,6 +74,7 @@
   color: var(--champagne-gold);
   letter-spacing: 0.05em;
 }
+.header--scrolled .logo-sub { color: var(--primary-purple); }
 
 /* ── Desktop nav ──────────────────────────────────────────── */
 .header__nav {
@@ -70,7 +83,7 @@
   gap: 0.15rem;
   margin-left: auto;
 }
-.nav-item { position: relative; }
+.nav-item { position: relative; z-index: 1; }
 
 /* Base nav-link — dark text (scrolled state) */
 .nav-link {
@@ -82,13 +95,13 @@
   font-weight: 600;
   color: var(--dark-text);
   border-radius: 8px;
-  transition: color 0.25s, background 0.25s;
+  transition: color 0.25s, background 0.25s, transform 0.25s ease;
   white-space: nowrap;
   position: relative;
   text-decoration: none;
 }
 /* Hero (transparent) state — white text */
-.nav-link--hero { color: rgba(255,255,255,0.92); }
+.nav-link--hero { color: rgba(255,255,255,0.96); }
 .nav-link--hero:hover { color: var(--champagne-gold); background: rgba(255,255,255,0.08); }
 
 /* Scrolled state hover */
@@ -174,6 +187,7 @@
   align-items: center;
   gap: 0.75rem;
   flex-shrink: 0;
+  margin-left: auto;
 }
 .lang-btn {
   display: flex;
@@ -201,35 +215,39 @@
 
 .hamburger {
   display: none;
-  padding: 8px;
+  padding: 9px 10px;
   color: var(--dark-text);
-  border-radius: 8px;
+  border-radius: 12px;
   transition: var(--transition);
-  background: none;
-  border: none;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.2);
   cursor: pointer;
+  box-shadow: 0 8px 20px rgba(89,48,79,0.08);
 }
 .hamburger--hero { color: var(--white); }
 .hamburger--hero:hover { background: rgba(255,255,255,0.12); }
-.header--scrolled .hamburger { color: var(--dark-text); }
+.header--scrolled .hamburger { color: var(--dark-text); background: rgba(246,240,246,0.85); border-color: rgba(123,66,111,0.12); }
 .hamburger:hover { background: var(--light-lavender); }
 
 /* ── Mobile overlay & drawer ──────────────────────────────── */
 .mobile-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: rgba(48, 38, 49, 0.4);
   z-index: 1001;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
 }
 .mobile-drawer {
   position: fixed;
   top: 0; right: 0; bottom: 0;
   width: min(340px, 90vw);
-  background: var(--white);
+  background: linear-gradient(180deg, var(--warm-white), var(--light-neutral));
   z-index: 1002;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  box-shadow: -20px 0 50px rgba(89,48,79,0.18);
 }
 .mobile-drawer__header {
   display: flex;
@@ -270,6 +288,9 @@
 }
 .mobile-nav-link:hover,
 .mobile-nav-link--active { background: var(--light-lavender); color: var(--royal-purple); }
+.mobile-nav-link--active {
+  box-shadow: inset 0 0 0 1px rgba(123,66,111,0.08);
+}
 .mobile-nav-link svg { transition: transform 0.3s ease; }
 .rotate-180 { transform: rotate(180deg); }
 .mobile-submenu { overflow: hidden; padding-left: 1rem; }

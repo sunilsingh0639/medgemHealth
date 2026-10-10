@@ -5,7 +5,7 @@ html { scroll-behavior: smooth; font-size: 16px; }
 body {
   font-family: var(--font-body);
   color: var(--dark-text);
-  background: var(--white);
+  background: linear-gradient(180deg, var(--warm-white) 0%, var(--light-neutral) 100%);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;

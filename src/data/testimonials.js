@@ -14,7 +14,7 @@ export const testimonials = [
     name: 'Amira Hassan',
     country: 'Egypt',
     treatment: 'IVF Treatment',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&q=80',
+    avatar: 'https://images.pexels.com/photos/6129197/pexels-photo-6129197.jpeg',
     text: 'Finding the right fertility specialist felt overwhelming until I connected with Medgem. The team helped me navigate my options and I felt genuinely cared for.',
     rating: 5,
     note: '(Illustrative demo testimonial)'

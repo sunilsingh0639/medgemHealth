@@ -129,7 +129,13 @@ export default function Header() {
                 <Link
                   to={link.path}
                   className={`nav-link ${isActive(link.path) ? 'nav-link--active' : ''} ${!scrolled ? 'nav-link--hero' : ''}`}
-                  onClick={() => link.dropdown && setActiveDropdown(activeDropdown === link.label ? null : link.label)}
+                  onClick={() => {
+                    if (link.dropdown) {
+                      setActiveDropdown(activeDropdown === link.label ? null : link.label);
+                    } else {
+                      setActiveDropdown(null);
+                    }
+                  }}
                 >
                   {link.label}
                   {link.dropdown && (
@@ -155,6 +161,7 @@ export default function Header() {
                           key={item.label}
                           to={item.path}
                           className={`dropdown-item ${item.highlight ? 'dropdown-item--highlight' : ''}`}
+                          onClick={() => setActiveDropdown(null)}
                         >
                           {item.label}
                         </Link>
@@ -244,6 +251,7 @@ export default function Header() {
                                   key={item.label}
                                   to={item.path}
                                   className={`mobile-submenu-item ${item.highlight ? 'mobile-submenu-item--highlight' : ''}`}
+                                  onClick={() => setMobileOpen(false)}
                                 >
                                   {item.label}
                                 </Link>
@@ -256,6 +264,7 @@ export default function Header() {
                       <Link
                         to={link.path}
                         className={`mobile-nav-link ${isActive(link.path) ? 'mobile-nav-link--active' : ''}`}
+                        onClick={() => setMobileOpen(false)}
                       >
                         {link.label}
                       </Link>

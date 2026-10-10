@@ -83,7 +83,7 @@ export default function Header() {
               <span className="logo-gem">M</span>
             </div>
             <div className="logo-text">
-              <span className="logo-name">Medgem</span>
+              <span className={`logo-name ${!scrolled ? 'logo-name--light' : ''}`}>Medgem</span>
               <span className="logo-sub">Global Healthcare</span>
             </div>
           </Link>
@@ -98,7 +98,7 @@ export default function Header() {
               >
                 <Link
                   to={link.path}
-                  className={`nav-link ${isActive(link.path) ? 'nav-link--active' : ''}`}
+                  className={`nav-link ${isActive(link.path) ? 'nav-link--active' : ''} ${!scrolled ? 'nav-link--hero' : ''}`}
                 >
                   {link.label}
                   {link.dropdown && <ChevronDown size={14} className={`nav-chevron ${activeDropdown === link.label ? 'nav-chevron--open' : ''}`} />}
@@ -125,7 +125,7 @@ export default function Header() {
           </nav>
 
           <div className="header__actions">
-            <button className="lang-btn" aria-label="Language selector">
+            <button className={`lang-btn ${!scrolled ? 'lang-btn--hero' : ''}`} aria-label="Language selector">
               <Globe size={16} />
               <span>EN</span>
             </button>
@@ -134,7 +134,7 @@ export default function Header() {
               Free Consultation
             </Link>
             <button
-              className="hamburger"
+              className={`hamburger ${!scrolled ? 'hamburger--hero' : ''}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}

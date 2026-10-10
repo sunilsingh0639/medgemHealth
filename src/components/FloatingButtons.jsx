@@ -5,7 +5,6 @@ import './FloatingButtons.css';
 
 export default function FloatingButtons() {
   const [show, setShow] = useState(false);
-  const [cookie, setCookie] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 400);
@@ -43,24 +42,6 @@ export default function FloatingButtons() {
           <MessageCircle size={22} />
         </motion.a>
       </div>
-
-      <AnimatePresence>
-        {cookie && (
-          <motion.div
-            className="cookie-banner glass"
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ delay: 2 }}
-          >
-            <p>This demo website uses cookies to improve your experience. <a href="#">Learn more</a></p>
-            <button className="btn-primary" style={{ padding: '8px 20px', fontSize: '0.85rem' }} onClick={() => setCookie(false)}>
-              Accept
-            </button>
-            <button className="cookie-dismiss" onClick={() => setCookie(false)}>Dismiss</button>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 }

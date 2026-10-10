@@ -4,6 +4,11 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight, Star, Shield, Users, Globe, ChevronDown } from 'lucide-react';
 import './HeroSection.css';
 
+const HERO_VIDEO_SRC =
+  'https://videos.pexels.com/video-files/3195394/3195394-hd_1920_1080_25fps.mp4';
+const HERO_VIDEO_POSTER =
+  'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&q=80';
+
 const words = ['Your Health.', 'Our Global', 'Commitment.'];
 
 interface TrustItem {
@@ -26,6 +31,7 @@ export default function HeroSection() {
   const parallaxX = useTransform(springX, [-1, 1], [-15, 15]);
   const parallaxY = useTransform(springY, [-1, 1], [-10, 10]);
   const heroRef = useRef<HTMLElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const handleMouse = (e: MouseEvent) => {
@@ -39,48 +45,55 @@ export default function HeroSection() {
     return () => el?.removeEventListener('mousemove', handleMouse);
   }, [mouseX, mouseY]);
 
+  // Graceful autoplay — browsers may block until user interaction
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    // prefers-reduced-motion: pause the video, poster stays visible
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      vid.pause();
+      return;
+    }
+    vid.play().catch((error) => {
+      console.warn('Hero video autoplay failed; the poster will remain visible.', error);
+    });
+  }, []);
+
   return (
     <section className="hero" ref={heroRef}>
-      {/* ── Animated background layer ── */}
+      {/* ── Cinematic video background ── */}
       <div className="hero__bg" aria-hidden="true">
-        {/* Gradient mesh */}
-        <div className="hero__mesh" />
-        {/* Orbs */}
-        <div className="hero__orb hero__orb--1" />
-        <div className="hero__orb hero__orb--2" />
-        <div className="hero__orb hero__orb--3" />
-        <div className="hero__orb hero__orb--4" />
-        {/* Particles */}
-        <div className="hero__particles">
-          {Array.from({ length: 16 }).map((_, i) => (
-            <div
-              key={i}
-              className="particle"
-              style={{
-                '--delay': `${i * 0.6}s`,
-                '--x': `${6 + i * 5.8}%`,
-                '--size': `${2 + (i % 3)}px`,
-              } as React.CSSProperties}
-            />
-          ))}
-        </div>
-        {/* SVG decorative curves */}
-        <svg className="hero__curves" viewBox="0 0 1440 800" preserveAspectRatio="none">
-          <path d="M0,400 C360,280 720,520 1440,340" stroke="rgba(197,164,93,0.18)" strokeWidth="2" fill="none" />
-          <path d="M0,520 C400,360 800,620 1440,460" stroke="rgba(197,164,93,0.09)" strokeWidth="1.5" fill="none" />
-          <path d="M0,200 C300,160 600,240 900,200 C1100,170 1300,220 1440,200" stroke="rgba(255,255,255,0.04)" strokeWidth="1" fill="none" />
-          <circle cx="180" cy="140" r="90" fill="none" stroke="rgba(197,164,93,0.1)" strokeWidth="1" />
-          <circle cx="1260" cy="620" r="130" fill="none" stroke="rgba(197,164,93,0.07)" strokeWidth="1" />
-          <circle cx="720" cy="400" r="200" fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
-        </svg>
-        {/* Rotating rings */}
-        <div className="hero__ring hero__ring--1 animate-spin-slow" />
-        <div className="hero__ring hero__ring--2" style={{ animationDirection: 'reverse' }} />
+        <video
+          ref={videoRef}
+          className="hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={HERO_VIDEO_POSTER}
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+        {/* Brand overlay — translucent purple-gold tint, video stays visible */}
+        <div className="hero__overlay" />
+        {/* Vignette — soft edge darkening */}
+        <div className="hero__vignette" />
+        {/* Header gradient — ensures nav text is readable over any video frame */}
+        <div className="hero__header-grad" />
       </div>
 
       <div className="hero__inner container">
+        <div className="hero__sweep" aria-hidden="true" />
         {/* ── Content ── */}
-        <div className="hero__content">
+        <motion.div
+          className="hero__content"
+          initial={{ opacity: 0, y: 28, scale: 0.98 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        >
           <motion.div
             className="hero__badge"
             initial={{ opacity: 0, y: 20 }}
@@ -148,7 +161,7 @@ export default function HeroSection() {
               </motion.div>
             ))}
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* ── Visual ── */}
         <div className="hero__visual">
