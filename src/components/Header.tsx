@@ -111,7 +111,9 @@ export default function Header() {
       >
         <div className="header__inner container">
           <Link to="/" className="header__logo">
-            <div className="logo-mark"><span className="logo-gem">M</span></div>
+            <div className="logo-mark">
+              <img src="/HealthcareEmblem.png" alt="Healthcare Logo" />
+              </div>
             <div className="logo-text">
               <span className={`logo-name ${!scrolled ? 'logo-name--light' : ''}`}>Medgem</span>
               <span className="logo-sub">Global Healthcare</span>

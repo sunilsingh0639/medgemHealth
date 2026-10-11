@@ -8,7 +8,9 @@ export default function Footer() {
       <div className="footer__main container">
         <div className="footer__brand">
           <div className="footer__logo">
-            <div className="logo-mark"><span className="logo-gem">M</span></div>
+            <div className="logo-mark">
+              <img src="/HealthcareEmblem.png" alt="Healthcare Logo" />
+              </div>
             <div className="logo-text">
               <span className="logo-name" style={{ color: 'var(--white)' }}>Medgem</span>
               <span className="logo-sub">Global Healthcare</span>
