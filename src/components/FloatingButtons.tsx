@@ -1,15 +1,23 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, MessageCircle } from 'lucide-react';
+import { contentApi } from '../api';
 import './FloatingButtons.css';
 
 export default function FloatingButtons() {
   const [show, setShow] = useState(false);
+  const [whatsapp, setWhatsapp] = useState('10000000000');
 
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 400);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    contentApi.getSettings()
+      .then(r => { if (r.data.data.whatsAppNumber) setWhatsapp(r.data.data.whatsAppNumber); })
+      .catch(() => {});
   }, []);
 
   return (
@@ -21,7 +29,7 @@ export default function FloatingButtons() {
           </motion.button>
         )}
       </AnimatePresence>
-      <motion.a href="https://wa.me/10000000000" className="fab fab--whatsapp" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} aria-label="WhatsApp contact">
+      <motion.a href={`https://wa.me/${whatsapp}`} className="fab fab--whatsapp" target="_blank" rel="noopener noreferrer" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} aria-label="WhatsApp contact">
         <MessageCircle size={22} />
       </motion.a>
     </div>

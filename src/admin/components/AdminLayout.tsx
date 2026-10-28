@@ -4,7 +4,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAdminAuth } from '../context/AdminAuthContext';
 import {
   LayoutDashboard, Stethoscope, Building2, Users, Globe, MessageSquare,
-  HelpCircle, Star, Settings, Image, Home, LogOut, Menu, X, ChevronRight
+  HelpCircle, Star, Settings, Image, Home, LogOut, Menu, X, ChevronRight,
+  Navigation, Layout
 } from 'lucide-react';
 import './AdminLayout.css';
 
@@ -18,6 +19,8 @@ const navItems = [
   { label: 'Testimonials', path: '/admin/testimonials', icon: Star },
   { label: 'FAQs', path: '/admin/faqs', icon: HelpCircle },
   { label: 'Enquiries', path: '/admin/enquiries', icon: MessageSquare },
+  { label: 'Navigation', path: '/admin/navigation', icon: Navigation },
+  { label: 'Footer', path: '/admin/footer', icon: Layout },
   { label: 'Media', path: '/admin/media', icon: Image },
   { label: 'Settings', path: '/admin/settings', icon: Settings },
 ];

@@ -30,8 +30,10 @@ import AdminTestimonials from './admin/pages/AdminTestimonials';
 import AdminFaqs from './admin/pages/AdminFaqs';
 import AdminEnquiries from './admin/pages/AdminEnquiries';
 import AdminHomePage from './admin/pages/AdminHomePage';
-import AdminSettings from './admin/pages/AdminSettings';
+import AdminNavigation from './admin/pages/AdminNavigation';
+import AdminFooter from './admin/pages/AdminFooter';
 import AdminMedia from './admin/pages/AdminMedia';
+import AdminSettings from './admin/pages/AdminSettings';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -86,6 +88,8 @@ export default function App() {
               <Route path="/admin/testimonials" element={<AdminTestimonials />} />
               <Route path="/admin/faqs" element={<AdminFaqs />} />
               <Route path="/admin/enquiries" element={<AdminEnquiries />} />
+              <Route path="/admin/navigation" element={<AdminNavigation />} />
+              <Route path="/admin/footer" element={<AdminFooter />} />
               <Route path="/admin/media" element={<AdminMedia />} />
               <Route path="/admin/settings" element={<AdminSettings />} />
             </Route>

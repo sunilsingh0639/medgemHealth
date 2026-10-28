@@ -181,3 +181,65 @@ export const mediaApi = {
 };
 
 export { parseJson };
+
+// ── Navigation & Footer types ────────────────────────────────────────────────
+export interface NavItemData {
+  id: number; label: string; path: string; isHighlight: boolean;
+  isVisible: boolean; displayOrder: number; parentId: number | null;
+  children: NavItemData[];
+}
+
+export interface FooterConfigData {
+  id: number; companyDescription: string; ctaLabel: string; ctaUrl: string;
+  copyrightText: string; privacyPolicyUrl: string; termsUrl: string;
+  cookiePolicyUrl: string; updatedAt: string;
+}
+
+export interface FooterLinkData {
+  id: number; footerColumnId: number; label: string; url: string;
+  isExternal: boolean; isVisible: boolean; displayOrder: number;
+}
+
+export interface FooterColumnData {
+  id: number; heading: string; displayOrder: number; isVisible: boolean;
+  links: FooterLinkData[]; updatedAt: string;
+}
+
+export interface PublicFooterData {
+  config: FooterConfigData;
+  columns: FooterColumnData[];
+  settings: SiteSettings;
+}
+
+export interface PublicNavData {
+  items: NavItemData[];
+  ctaLabel: string;
+  ctaUrl: string;
+}
+
+export const navigationApi = {
+  getPublic: () => api.get<ApiResponse<PublicNavData>>('/navigation'),
+  getAll: () => api.get<ApiResponse<NavItemData[]>>('/navigation/admin/all'),
+  create: (data: Omit<NavItemData, 'id' | 'children'>) =>
+    api.post<ApiResponse<NavItemData>>('/navigation', data),
+  update: (id: number, data: Omit<NavItemData, 'id' | 'children'>) =>
+    api.put<ApiResponse<NavItemData>>(`/navigation/${id}`, data),
+  delete: (id: number) => api.delete(`/navigation/${id}`),
+};
+
+export const footerApi = {
+  getPublic: () => api.get<ApiResponse<PublicFooterData>>('/footer'),
+  getConfig: () => api.get<ApiResponse<FooterConfigData>>('/footer/config'),
+  updateConfig: (data: FooterConfigData) => api.put<ApiResponse<FooterConfigData>>('/footer/config', data),
+  getColumns: () => api.get<ApiResponse<FooterColumnData[]>>('/footer/columns'),
+  createColumn: (data: Omit<FooterColumnData, 'id' | 'links' | 'updatedAt'>) =>
+    api.post<ApiResponse<FooterColumnData>>('/footer/columns', data),
+  updateColumn: (id: number, data: Omit<FooterColumnData, 'id' | 'links' | 'updatedAt'>) =>
+    api.put<ApiResponse<FooterColumnData>>(`/footer/columns/${id}`, data),
+  deleteColumn: (id: number) => api.delete(`/footer/columns/${id}`),
+  createLink: (data: Omit<FooterLinkData, 'id'>) =>
+    api.post<ApiResponse<FooterLinkData>>('/footer/links', data),
+  updateLink: (id: number, data: Omit<FooterLinkData, 'id'>) =>
+    api.put<ApiResponse<FooterLinkData>>(`/footer/links/${id}`, data),
+  deleteLink: (id: number) => api.delete(`/footer/links/${id}`),
+};
