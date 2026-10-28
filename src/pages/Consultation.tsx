@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, ArrowRight, ArrowLeft, Loader, Phone, FileText, Upload } from 'lucide-react';
+import { enquiriesApi } from '../api';
 import './PageStyles.css';
 
 const stepLabels = ['Contact Info', 'Treatment', 'Case Details', 'Documents', 'Review'];
@@ -39,7 +40,7 @@ export default function Consultation() {
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     if (step < 4) setStep(s => s + 1);
-    else { setStatus('loading'); setTimeout(() => setStatus('success'), 2000); }
+    else { setStatus('loading'); (async () => { try { await enquiriesApi.submitConsultation({ name: form.name, email: form.email, phone: form.phone, country: form.country, treatment: form.treatment, destination: form.destination, description: form.description }); setStatus('success'); } catch { setStatus('idle'); setErrors({ name: 'Submission failed. Please try again.' }); } })(); }
   };
 
   if (status === 'success') return (
@@ -49,7 +50,7 @@ export default function Consultation() {
           <motion.div className="contact-success" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
             <CheckCircle size={64} color="#22c55e" />
             <h3>Consultation Request Submitted!</h3>
-            <p>Thank you for your enquiry. Our team will review your request and be in touch shortly. This is a demo — no data has been transmitted or stored.</p>
+            <p>Thank you for your enquiry. Our team will review your request and be in touch shortly.</p>
             <button className="btn-primary" onClick={() => { setStatus('idle'); setStep(0); setForm({ name: '', email: '', phone: '', country: '', treatment: '', destination: '', description: '', file: null }); }}>Submit Another Request</button>
           </motion.div>
         </div>
@@ -145,7 +146,7 @@ export default function Consultation() {
                     <div className="sidebar-info-item"><span>Treatment</span><span>{form.treatment || 'Not specified'}</span></div>
                     <div className="sidebar-info-item"><span>Destination</span><span>{form.destination || 'Any'}</span></div>
                   </div>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--muted-text)', fontStyle: 'italic', marginTop: '1rem' }}>Demo only. No data will be transmitted or stored.</p>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--muted-text)', fontStyle: 'italic', marginTop: '1rem' }}>Your request will be securely submitted.</p>
                 </>
               )}
               <div className="consult-nav">

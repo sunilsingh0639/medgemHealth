@@ -18,6 +18,20 @@ import Contact from './pages/Contact';
 import Consultation from './pages/Consultation';
 import SecondOpinion from './pages/SecondOpinion';
 import NotFound from './pages/NotFound';
+import { AdminAuthProvider } from './admin/context/AdminAuthContext';
+import AdminLayout, { AdminGuard } from './admin/components/AdminLayout';
+import AdminLogin from './admin/pages/AdminLogin';
+import AdminDashboard from './admin/pages/AdminDashboard';
+import AdminTreatments from './admin/pages/AdminTreatments';
+import AdminHospitals from './admin/pages/AdminHospitals';
+import AdminDoctors from './admin/pages/AdminDoctors';
+import AdminDestinations from './admin/pages/AdminDestinations';
+import AdminTestimonials from './admin/pages/AdminTestimonials';
+import AdminFaqs from './admin/pages/AdminFaqs';
+import AdminEnquiries from './admin/pages/AdminEnquiries';
+import AdminHomePage from './admin/pages/AdminHomePage';
+import AdminSettings from './admin/pages/AdminSettings';
+import AdminMedia from './admin/pages/AdminMedia';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -25,7 +39,7 @@ function ScrollToTop(): null {
   return null;
 }
 
-function AppLayout() {
+function PublicLayout() {
   return (
     <>
       <ScrollToTop />
@@ -58,7 +72,27 @@ function AppLayout() {
 export default function App() {
   return (
     <BrowserRouter>
-      <AppLayout />
+      <AdminAuthProvider>
+        <Routes>
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route element={<AdminGuard />}>
+            <Route element={<AdminLayout />}>
+              <Route path="/admin" element={<AdminDashboard />} />
+              <Route path="/admin/homepage" element={<AdminHomePage />} />
+              <Route path="/admin/treatments" element={<AdminTreatments />} />
+              <Route path="/admin/hospitals" element={<AdminHospitals />} />
+              <Route path="/admin/doctors" element={<AdminDoctors />} />
+              <Route path="/admin/destinations" element={<AdminDestinations />} />
+              <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+              <Route path="/admin/faqs" element={<AdminFaqs />} />
+              <Route path="/admin/enquiries" element={<AdminEnquiries />} />
+              <Route path="/admin/media" element={<AdminMedia />} />
+              <Route path="/admin/settings" element={<AdminSettings />} />
+            </Route>
+          </Route>
+          <Route path="/*" element={<PublicLayout />} />
+        </Routes>
+      </AdminAuthProvider>
     </BrowserRouter>
   );
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Send, CheckCircle, Loader } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
 import { fadeUp, viewportConfig } from '../animations/motionVariants';
+import { enquiriesApi } from '../api';
 import './ContactBanner.css';
 
 const treatmentList = ['Cardiology','Orthopaedics','Oncology','Neurology','Cosmetic Surgery','Dental Care','Fertility & IVF','Other'];
@@ -26,12 +27,18 @@ export default function ContactBanner() {
     return e;
   };
 
-  const handleSubmit = (ev: React.FormEvent) => {
+  const handleSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     setStatus('loading');
-    setTimeout(() => setStatus('success'), 1800);
+    try {
+      await enquiriesApi.submitContact({ name: form.name, email: form.email, phoneCode: form.code, phone: form.phone, treatment: form.treatment, destination: form.destination, message: form.message });
+      setStatus('success');
+    } catch {
+      setStatus('idle');
+      setErrors({ name: 'Submission failed. Please try again.' });
+    }
   };
 
   const set = (k: keyof ContactForm, v: string) => {
@@ -46,7 +53,7 @@ export default function ContactBanner() {
         <motion.div className="contact-success" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
           <CheckCircle size={56} color="#22c55e" />
           <h3>Enquiry Received!</h3>
-          <p>Thank you for reaching out. Our team will be in touch shortly. This is a demo — no data has been transmitted.</p>
+          <p>Thank you for reaching out. Our team will be in touch shortly.</p>
           <button className="btn-primary" onClick={() => setStatus('idle')}>Send Another Enquiry</button>
         </motion.div>
       </div>
@@ -118,7 +125,7 @@ export default function ContactBanner() {
             <button type="submit" className="btn-primary" style={{ width: '100%', justifyContent: 'center' }} disabled={status === 'loading'}>
               {status === 'loading' ? <><Loader size={18} className="spin" /> Sending...</> : <><Send size={18} /> Send Enquiry</>}
             </button>
-            <p className="form-disclaimer">Demo only. No data is transmitted or stored.</p>
+            <p className="form-disclaimer">Your enquiry is securely submitted and stored.</p>
           </motion.form>
         </div>
       </div>

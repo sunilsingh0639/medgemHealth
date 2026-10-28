@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CheckCircle, ArrowRight, ArrowLeft, Loader, Upload } from 'lucide-react';
+import { enquiriesApi } from '../api';
 import './PageStyles.css';
 
 const stepLabels = ['Contact Info', 'Treatment', 'Case Details', 'Documents', 'Review'];
@@ -32,7 +33,7 @@ export default function SecondOpinion() {
     const e = validate();
     if (Object.keys(e).length) { setErrors(e); return; }
     if (step < 4) setStep(s => s + 1);
-    else { setStatus('loading'); setTimeout(() => setStatus('success'), 2000); }
+    else { setStatus('loading'); (async () => { try { await enquiriesApi.submitSecondOpinion({ name: form.name, email: form.email, phone: form.phone, treatment: form.treatment, diagnosis: form.diagnosis, description: form.description }); setStatus('success'); } catch { setStatus('idle'); setErrors({ name: 'Submission failed. Please try again.' }); } })(); }
   };
 
   if (status === 'success') return (
@@ -42,7 +43,7 @@ export default function SecondOpinion() {
           <motion.div className="contact-success" initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
             <CheckCircle size={64} color="#22c55e" />
             <h3>Second Opinion Request Submitted!</h3>
-            <p>Our team will review your case and coordinate access to a relevant specialist perspective. This is a demo — no data has been transmitted. Medgem does not provide actual medical opinions.</p>
+            <p>Our team will review your case and coordinate access to a relevant specialist perspective.</p>
             <button className="btn-primary" onClick={() => { setStatus('idle'); setStep(0); }}>Submit Another Request</button>
           </motion.div>
         </div>
@@ -128,7 +129,7 @@ export default function SecondOpinion() {
                     <div className="sidebar-info-item"><span>Treatment</span><span>{form.treatment}</span></div>
                     <div className="sidebar-info-item"><span>Diagnosis</span><span>{form.diagnosis || 'Not specified'}</span></div>
                   </div>
-                  <p style={{ fontSize: '0.78rem', color: 'var(--muted-text)', fontStyle: 'italic', marginTop: '1rem' }}>Demo only. Medgem does not provide actual medical opinions or diagnoses. No data will be transmitted.</p>
+                  <p style={{ fontSize: '0.78rem', color: 'var(--muted-text)', fontStyle: 'italic', marginTop: '1rem' }}>Your request will be securely submitted. Medgem does not provide actual medical opinions or diagnoses.</p>
                 </>
               )}
               <div className="consult-nav">
