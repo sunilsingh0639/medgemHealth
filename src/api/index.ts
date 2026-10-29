@@ -243,3 +243,74 @@ export const footerApi = {
     api.put<ApiResponse<FooterLinkData>>(`/footer/links/${id}`, data),
   deleteLink: (id: number) => api.delete(`/footer/links/${id}`),
 };
+
+// ── Patient Gallery ──────────────────────────────────────────────────────────
+export interface GalleryImage {
+  id: number; patientGalleryId: number; url: string; altText: string; caption: string; displayOrder: number;
+}
+export interface GalleryEntry {
+  id: number; patientName: string; treatmentName: string; title: string; description: string;
+  location: string; status: string; displayOrder: number; consentGiven: boolean;
+  createdAt: string; updatedAt: string; images: GalleryImage[];
+}
+export type GalleryUpsertRequest = Omit<GalleryEntry, 'id' | 'createdAt' | 'updatedAt' | 'images'>;
+
+export const galleryApi = {
+  getPublished: () => api.get<ApiResponse<GalleryEntry[]>>('/gallery'),
+  getById: (id: number) => api.get<ApiResponse<GalleryEntry>>(`/gallery/${id}`),
+  getAll: () => api.get<ApiResponse<GalleryEntry[]>>('/gallery/admin/all'),
+  create: (data: GalleryUpsertRequest) => api.post<ApiResponse<GalleryEntry>>('/gallery', data),
+  update: (id: number, data: GalleryUpsertRequest) => api.put<ApiResponse<GalleryEntry>>(`/gallery/${id}`, data),
+  delete: (id: number) => api.delete(`/gallery/${id}`),
+  uploadImages: (id: number, files: File[]) => {
+    const form = new FormData();
+    files.forEach(f => form.append('files', f));
+    return api.post<ApiResponse<GalleryImage[]>>(`/gallery/${id}/images/upload`, form, { headers: { 'Content-Type': 'multipart/form-data' } });
+  },
+  addImageByUrl: (id: number, data: { url: string; altText: string; caption: string; displayOrder: number }) =>
+    api.post<ApiResponse<GalleryImage>>(`/gallery/${id}/images`, { patientGalleryId: id, ...data }),
+  updateImage: (imgId: number, data: { patientGalleryId: number; url: string; altText: string; caption: string; displayOrder: number }) =>
+    api.put<ApiResponse<GalleryImage>>(`/gallery/images/${imgId}`, data),
+  deleteImage: (imgId: number) => api.delete(`/gallery/images/${imgId}`),
+};
+
+// ── Patient Stories ──────────────────────────────────────────────────────────
+export interface StoryPhoto {
+  id: number; patientStoryId: number; url: string; altText: string; caption: string; displayOrder: number;
+}
+export interface PatientStory {
+  id: number; patientName: string; treatment: string; hospital: string; title: string;
+  description: string; thumbnailUrl: string; videoUrl: string; videoTitle: string;
+  videoProvider: string; isFeatured: boolean; status: string; displayOrder: number;
+  consentGiven: boolean; publishedAt: string; createdAt: string; updatedAt: string;
+  photos: StoryPhoto[];
+}
+export type StoryUpsertRequest = Omit<PatientStory, 'id' | 'createdAt' | 'updatedAt' | 'photos'>;
+
+export const storiesApi = {
+  getPublished: () => api.get<ApiResponse<PatientStory[]>>('/stories'),
+  getFeatured: () => api.get<ApiResponse<PatientStory[]>>('/stories/featured'),
+  getById: (id: number) => api.get<ApiResponse<PatientStory>>(`/stories/${id}`),
+  getAll: () => api.get<ApiResponse<PatientStory[]>>('/stories/admin/all'),
+  create: (data: StoryUpsertRequest) => api.post<ApiResponse<PatientStory>>('/stories', data),
+  update: (id: number, data: StoryUpsertRequest) => api.put<ApiResponse<PatientStory>>(`/stories/${id}`, data),
+  delete: (id: number) => api.delete(`/stories/${id}`),
+  uploadVideo: (id: number, file: File) => {
+    const form = new FormData(); form.append('file', file);
+    return api.post<ApiResponse<string>>(`/stories/${id}/video/upload`, form, { headers: { 'Content-Type': 'multipart/form-data' } });
+  },
+  uploadThumbnail: (id: number, file: File) => {
+    const form = new FormData(); form.append('file', file);
+    return api.post<ApiResponse<string>>(`/stories/${id}/thumbnail/upload`, form, { headers: { 'Content-Type': 'multipart/form-data' } });
+  },
+  uploadPhotos: (id: number, files: File[]) => {
+    const form = new FormData();
+    files.forEach(f => form.append('files', f));
+    return api.post<ApiResponse<StoryPhoto[]>>(`/stories/${id}/photos/upload`, form, { headers: { 'Content-Type': 'multipart/form-data' } });
+  },
+  addPhotoByUrl: (id: number, data: { url: string; altText: string; caption: string; displayOrder: number }) =>
+    api.post<ApiResponse<StoryPhoto>>(`/stories/${id}/photos`, { patientStoryId: id, ...data }),
+  updatePhoto: (photoId: number, data: { patientStoryId: number; url: string; altText: string; caption: string; displayOrder: number }) =>
+    api.put<ApiResponse<StoryPhoto>>(`/stories/photos/${photoId}`, data),
+  deletePhoto: (photoId: number) => api.delete(`/stories/photos/${photoId}`),
+};

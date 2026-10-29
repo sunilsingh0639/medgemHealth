@@ -34,6 +34,10 @@ import AdminNavigation from './admin/pages/AdminNavigation';
 import AdminFooter from './admin/pages/AdminFooter';
 import AdminMedia from './admin/pages/AdminMedia';
 import AdminSettings from './admin/pages/AdminSettings';
+import AdminGallery from './admin/pages/AdminGallery';
+import AdminStories from './admin/pages/AdminStories';
+import PatientGallery from './pages/PatientGallery';
+import PatientStories from './pages/PatientStories';
 
 function ScrollToTop(): null {
   const { pathname } = useLocation();
@@ -62,6 +66,8 @@ function PublicLayout() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/second-opinion" element={<SecondOpinion />} />
+          <Route path="/patient-gallery" element={<PatientGallery />} />
+          <Route path="/patient-stories" element={<PatientStories />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
@@ -91,6 +97,8 @@ export default function App() {
               <Route path="/admin/navigation" element={<AdminNavigation />} />
               <Route path="/admin/footer" element={<AdminFooter />} />
               <Route path="/admin/media" element={<AdminMedia />} />
+              <Route path="/admin/gallery" element={<AdminGallery />} />
+              <Route path="/admin/stories" element={<AdminStories />} />
               <Route path="/admin/settings" element={<AdminSettings />} />
             </Route>
           </Route>

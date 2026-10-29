@@ -5,7 +5,7 @@ import { useAdminAuth } from '../context/AdminAuthContext';
 import {
   LayoutDashboard, Stethoscope, Building2, Users, Globe, MessageSquare,
   HelpCircle, Star, Settings, Image, Home, LogOut, Menu, X, ChevronRight,
-  Navigation, Layout
+  Navigation, Layout, Images, BookOpen
 } from 'lucide-react';
 import './AdminLayout.css';
 
@@ -22,6 +22,8 @@ const navItems = [
   { label: 'Navigation', path: '/admin/navigation', icon: Navigation },
   { label: 'Footer', path: '/admin/footer', icon: Layout },
   { label: 'Media', path: '/admin/media', icon: Image },
+  { label: 'Gallery', path: '/admin/gallery', icon: Images },
+  { label: 'Stories', path: '/admin/stories', icon: BookOpen },
   { label: 'Settings', path: '/admin/settings', icon: Settings },
 ];
 
